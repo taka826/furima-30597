@@ -1,24 +1,67 @@
-# README
+## users
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+|Column             |Type   |Options     |
+|-------------------|-------|------------|
+|nickname           |string |null: false |
+|email              |string |null: false |
+|encrypted_password |string |null: false |
+|first_name         |string |null: false |
+|last_name          |string |null: false |
+|first_lana         |string |null: false |
+|last_kana          |string |null: false |
+|birthday           |integer|null: false |
 
-Things you may want to cover:
 
-* Ruby version
+### Association
+has_many :items
+has_many :purchase_history
 
-* System dependencies
+## items
 
-* Configuration
+|Column             |Type          |Options          |
+|-------------------|--------------|-----------------|
+|product_name       |string        |null: false      |
+|product_image      |ActiveStorage |null: false      |
+|product_description|text          |null: false      |
+|category           |string        |null: false      |
+|product_condition  |string        |null: false      |
+|shipping_cost      |string        |null: false      |
+|shipping_area      |string        |null: false      |
+|shipping_days      |datetime      |null: false      |
+|price              |integer       |null: false      |
+|seller             |string        |null: false      |
+|user_id            |references    |foreign_key: true|
 
-* Database creation
 
-* Database initialization
+### Association
+belongs_to :users
+has_one :purchase_history
 
-* How to run the test suite
+## purchase_history
 
-* Services (job queues, cache servers, search engines, etc.)
+|Column        |Type       |Options          |
+|--------------|-----------|-----------------|
+|buyer         |string     |null: false      |
+|purchase_data |datetime   |null: false      |
+|purchase      |string     |null: false      |
+|user_id       |references |foreign_key: true|
 
-* Deployment instructions
 
-* ...
+### Association
+belongs_to :items
+belongs_to :users
+has_one :addresses
+
+
+## addresses
+
+|Column       |Type    |Options          |
+|-------------|--------|-----------------|
+|postal_code  |integer |null: false      |
+|prefecture   |string  |null: false      |
+|municipality |string  |null: false      |
+|address      |string  |null: false      |
+|phone        |integer |null: false      |
+
+### Association
+belongs_to :purchase_history
