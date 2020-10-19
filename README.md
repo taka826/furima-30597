@@ -20,8 +20,8 @@ has_many :purchase_histories
 
 |Column             |Type          |Options                       |
 |-------------------|--------------|------------------------------|
-|product_name       |string        |null: false                   |
-|product_description|text          |null: false                   |
+|name               |string        |null: false                   |
+|description        |text          |null: false                   |
 |category_id        |integer       |null: false                   |
 |condition_id       |integer       |null: false                   |
 |cost_id            |integer       |null: false                   |
@@ -35,7 +35,7 @@ has_many :purchase_histories
 belongs_to :user
 has_one :purchase_history
 
-## purchase_history
+## purchase_histories
 
 |Column        |Type       |Options                       |
 |--------------|-----------|------------------------------|
