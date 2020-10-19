@@ -1,67 +1,66 @@
 ## users
 
-|Column             |Type   |Options     |
-|-------------------|-------|------------|
-|nickname           |string |null: false |
-|email              |string |null: false |
-|encrypted_password |string |null: false |
-|first_name         |string |null: false |
-|last_name          |string |null: false |
-|first_lana         |string |null: false |
-|last_kana          |string |null: false |
-|birthday           |integer|null: false |
+|Column             |Type    |Options     |
+|-------------------|--------|------------|
+|nickname           |string  |null: false |
+|email              |string  |null: false |
+|encrypted_password |string  |null: false |
+|first_name         |string  |null: false |
+|last_name          |string  |null: false |
+|first_lana         |string  |null: false |
+|last_kana          |string  |null: false |
+|birthday           |datetime|null: false |
 
 
 ### Association
 has_many :items
-has_many :purchase_history
+has_many :purchase_histories
 
 ## items
 
-|Column             |Type          |Options          |
-|-------------------|--------------|-----------------|
-|product_name       |string        |null: false      |
-|product_image      |ActiveStorage |null: false      |
-|product_description|text          |null: false      |
-|category           |string        |null: false      |
-|product_condition  |string        |null: false      |
-|shipping_cost      |string        |null: false      |
-|shipping_area      |string        |null: false      |
-|shipping_days      |datetime      |null: false      |
-|price              |integer       |null: false      |
-|seller             |string        |null: false      |
-|user_id            |references    |foreign_key: true|
+|Column             |Type          |Options                       |
+|-------------------|--------------|------------------------------|
+|product_name       |string        |null: false                   |
+|product_description|text          |null: false                   |
+|category_id        |integer       |null: false                   |
+|condition_id       |integer       |null: false                   |
+|cost_id            |integer       |null: false                   |
+|area_id            |integer       |null: false                   |
+|days_id            |integer       |null: false                   |
+|price              |integer       |null: false                   |
+|user               |references    |foreign_key: true, null: false|
 
 
 ### Association
-belongs_to :users
+belongs_to :user
 has_one :purchase_history
 
 ## purchase_history
 
-|Column        |Type       |Options          |
-|--------------|-----------|-----------------|
-|buyer         |string     |null: false      |
-|purchase_data |datetime   |null: false      |
-|purchase      |string     |null: false      |
-|user_id       |references |foreign_key: true|
+|Column        |Type       |Options                       |
+|--------------|-----------|------------------------------|
+|user          |references |foreign_key: true, null: false|
+|item          |references |foreign_key: true, null: false|
 
 
 ### Association
-belongs_to :items
-belongs_to :users
-has_one :addresses
+belongs_to :item
+belongs_to :user
+has_one :address
 
 
 ## addresses
 
-|Column       |Type    |Options          |
-|-------------|--------|-----------------|
-|postal_code  |integer |null: false      |
-|prefecture   |string  |null: false      |
-|municipality |string  |null: false      |
-|address      |string  |null: false      |
-|phone        |integer |null: false      |
+|Column          |Type      |Options                       |
+|----------------|----------|------------------------------|
+|postal_code     |string    |null: false                   |
+|prefecture_id   |integer   |null: false                   |
+|municipality    |string    |null: false                   |
+|address         |string    |null: false                   |
+|phone           |string    |null: false                   |
+|build_name      |string    |                              |
+|purchase_history|references|foreign_key: true, null: false|
+
 
 ### Association
 belongs_to :purchase_history
