@@ -22,6 +22,11 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
+      it "emailに＠が使われていないと登録できない" do
+        @user.email = "aaamail.com"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
+      end
       it "重複したemailが存在する場合登録できない" do
         @user.save
         another_user = FactoryBot.build(:user)
@@ -48,6 +53,12 @@ describe User do
       it "passwordは英数字混合出なければ登録できない" do
         @user.password = "000000"
         @user.password_confirmation = "000000"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Input least one single alphanumeric character.")
+      end
+      it "passwordは英字のみだと登録できない" do
+        @user.password = "aaaaaa"
+        @user.password_confirmation = "aaaaaa"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid. Input least one single alphanumeric character.")
       end
