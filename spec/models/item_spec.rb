@@ -28,27 +28,27 @@ describe Item do
       expect(@item.errors.full_messages).to include("Description can't be blank")
     end
     it "カテゴリー選択がない場合は保存できないこと" do
-      @item.category_id = "1"
+      @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Category must be other than 1")
     end
     it "商品の状態選択がない場合は保存できないこと" do
-      @item.condition_id = "1"
+      @item.condition_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Condition must be other than 1")
     end
     it "配送料選択がない場合は保存できないこと" do
-      @item.cost_id = "1"
+      @item.cost_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Cost must be other than 1")
     end
     it "発送元選択がない場合は保存できないこと" do
-      @item.area_id = "0"
+      @item.area_id = 0
       @item.valid?
       expect(@item.errors.full_messages).to include("Area must be other than 0")
     end
     it "発送日選択がない場合は保存できないこと" do
-      @item.day_id = "1"
+      @item.day_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Day must be other than 1")
     end
@@ -58,12 +58,17 @@ describe Item do
       expect(@item.errors.full_messages).to include("Price can't be blank")
     end
     it "金額が300以下の場合は保存できないこと" do
-      @item.price = "299"
+      @item.price = 299
       @item.valid?
       expect(@item.errors.full_messages).to include("Price Out of Range")
     end
     it "金額が9,999,999以上の場合は保存できないこと" do
-      @item.price = "10000000"
+      @item.price = 10000000
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price Out of Range")
+    end
+    it "金額に数字以外が入力された場合は保存できない事" do
+      @item.price = "aaaa"
       @item.valid?
       expect(@item.errors.full_messages).to include("Price Out of Range")
     end
