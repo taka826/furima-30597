@@ -2,28 +2,27 @@ class OrdersController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
+    @user_item = UserItem.new
   end
 
   def new
-    @user = user.new
+    @user_item = UserItem.new
   end
 
   def create
-    @user = User.create(order_params)
-    if @user.save
-      redirect_to action: :index
-    else
-      render action: :new
-    end
+    @item = Item.find(params[:item_id])
+    @user_item = UserItem.new(item_params)
+      if @user_item.valid?
+        @user_item.save
+        redirect_to action: :index
+      else
+        render action: :index
+      end
   end
 
   private
 
-  def order_params
-    params.require(:user).permit(:nickname, :email, :encrypted_password, :first_name, :last_name, :first_kana, :last_kana, :birthday)
-  end
-  
   def item_params
-    params.require(:item).permit(:content, :image, :name, :description, :category_id, :condition_id, :cost_id, :area_id, :day_id, :price, :user).merge(user_id: current_user.id)
+    params.require(:user_item).permit(:postal_code, :area_id, :city, :house_number, :phone, :build_name, :order_id)
   end
 end
