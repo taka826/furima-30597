@@ -14,7 +14,7 @@
 
 ### Association
 has_many :items
-has_many :purchase_histories
+has_many :orders
 
 ## items
 
@@ -33,9 +33,9 @@ has_many :purchase_histories
 
 ### Association
 belongs_to :user
-has_one :purchase_history
+has_one :order
 
-## purchase_histories
+## orders
 
 |Column        |Type       |Options                       |
 |--------------|-----------|------------------------------|
@@ -54,13 +54,13 @@ has_one :address
 |Column          |Type      |Options                       |
 |----------------|----------|------------------------------|
 |postal_code     |string    |null: false                   |
-|prefecture_id   |integer   |null: false                   |
-|municipality    |string    |null: false                   |
-|address         |string    |null: false                   |
+|area_id         |integer   |null: false                   |
+|city            |string    |null: false                   |
+|house_number    |string    |null: false                   |
 |phone           |string    |null: false                   |
 |build_name      |string    |                              |
-|purchase_history|references|foreign_key: true, null: false|
+|order           |references|foreign_key: true, null: false|
 
 
 ### Association
-belongs_to :purchase_history
+belongs_to :order
