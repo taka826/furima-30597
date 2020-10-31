@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UserItem, type: :model do
-  describe '寄付情報の保存' do
+  describe '購入機能のテストコード' do
     before do
       @user_item = FactoryBot.build(:user_item)
     end

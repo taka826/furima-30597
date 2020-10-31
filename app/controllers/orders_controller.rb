@@ -12,10 +12,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def new
-    @user_item = UserItem.new
-  end
-
   def create
     @user_item = UserItem.new(item_params)
       if @user_item.valid?
